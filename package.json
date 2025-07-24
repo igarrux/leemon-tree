@@ -1,7 +1,7 @@
 {
     "name": "lemontree",
     "version": "0.1.0",
-    "description": "Herramienta CLI para automatizar la creación y gestión de traducciones i18n.",
+    "description": "CLI tool to automate translation management in multilingual projects.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "type": "module",
