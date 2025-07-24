@@ -251,4 +251,9 @@ describe('PrintMessages', () => {
         const { PrintMessages: PM } = await import('./print_message');
         expect(PM.lang).toBe('es');
     });
+
+    it('noAddTranslation prints no_add_translation', () => {
+        PrintMessages.noAddTranslation('key');
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('key'));
+    });
 });
