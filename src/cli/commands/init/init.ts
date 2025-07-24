@@ -8,7 +8,7 @@ import { join } from 'path';
 export const initCommand = () => {
     const destPath = join(process.cwd(), 'lemon-tree.yaml');
     if (!existsSync(destPath)) {
-        copyFileSync(join(__dirname, 'init-lemon-tree.config.yaml'), destPath);
+        copyFileSync(join(import.meta.dirname, 'init-lemon-tree.config.yaml'), destPath);
         console.log('Config file created: lemon-tree.yaml');
         return;
     }
