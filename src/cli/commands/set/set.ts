@@ -10,6 +10,7 @@ import { handleTranslate } from '../_helpers/handle-translate/handle-translate.j
 import { PrintMessages } from '../../_utils/index.js';
 import { TypeDefinition } from '../_utils/type-definition/type-definition.js';
 import { runPostScripts } from '../_helpers/run-post-scripts/run-post-scripts.js';
+import { runPreScripts } from '../_helpers/run-pre-scripts/run-pre-scripts.js';
 
 /**
  * Set a translation for a key
@@ -36,7 +37,7 @@ export const setCommand = async ({ key, text, dryRun }: SetParams) => {
     const handleOverwrite = handleTranslationOverwrite();
     const promisesPool = new Set<Promise<void>>();
     PrintMessages.clearTerminal();
-
+    runPreScripts();
     let overwrite: 'overwrite' | 'overwriteAll' | 'skip' | 'skipAll' | 'none' = 'none';
     for (const lang of languages) {
         const { filePath, dir, protectionPattern } = resolveLanguageConfig(config, lang);
