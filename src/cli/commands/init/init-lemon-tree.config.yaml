@@ -1,0 +1,25 @@
+languages:
+  - en
+  - es
+  - ru
+  - ja
+sourceLanguage: en
+cliLanguage: en
+
+default:
+  filePattern: ./src/translations/{{lang.toLowerCase()}}/{{lang.toLowerCase()}}.json
+  protectionPattern: "{{key}}"
+  typeDefinition:
+    file: ./src/translations/translations.types.ts
+    exportName: Translations
+    
+
+api:
+  provider: google
+  key: "{{API_KEY}}"
+
+postScript:
+  - echo "postScript you can remove it in the lemon-tree.yaml file"
+
+preScript:
+  - echo "preScript you can remove it in the lemon-tree.yaml file"

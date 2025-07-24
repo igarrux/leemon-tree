@@ -1,0 +1,10 @@
+src
+.eslintrc.json
+.prettierrc.json
+.vscode
+.gitignore
+.npmignore
+.prettierignore
+coverage
+node_modules
+__temp__

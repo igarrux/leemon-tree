@@ -1,0 +1,1 @@
+export const ADMITED_API_PROVIDERS = ['deepl-free', 'deepl-pro', 'google', 'microsoft', 'plugin', 'yandex'];
