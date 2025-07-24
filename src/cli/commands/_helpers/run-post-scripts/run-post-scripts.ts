@@ -1,4 +1,4 @@
-import { config } from '../../../../_utils';
+import { config } from '../../../../_utils/index.js';
 import { execSync } from 'child_process';
 
 /**
