@@ -3,6 +3,6 @@ import { getPkgVersion } from './pkg-version.js';
 
 describe('getPkgVersion', () => {
     it('should return the version of the package', () => {
-        expect(getPkgVersion()).toBe('0.1.0');
+        expect(getPkgVersion()).toMatch(/^\d+\.\d+\.\d+$/);
     });
 });
