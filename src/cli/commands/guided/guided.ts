@@ -29,7 +29,7 @@ export const guidedCommand = async ({ dryRun }: { dryRun?: boolean } = {}) => {
         let translation = [text, key];
         let action = '';
         while (!action) {
-            const act = await GuidedPrompts.translationAdded();
+            const act = await GuidedPrompts.translationAdded(key);
             if (act === 'finished') {
                 running = false;
                 break;
@@ -46,6 +46,8 @@ export const guidedCommand = async ({ dryRun }: { dryRun?: boolean } = {}) => {
 
             if (act === 'delete') {
                 translation = [];
+                PrintMessages.noAddTranslation(key);
+                break;
             }
 
             if (act === 'continue') {
