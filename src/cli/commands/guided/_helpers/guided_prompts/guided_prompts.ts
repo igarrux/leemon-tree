@@ -45,8 +45,11 @@ export class GuidedPrompts {
         return input?.trim?.() as string;
     }
 
-    static async translationAdded() {
-        const message = this.messages.translation_added;
+    static async translationAdded(key: string) {
+        const message = this.messages.translation_added.replace(
+            '{{key}}',
+            `\x1b[0m\x1b[36m${key}\x1b[33m`,
+        );
         const edit = this.messages.edit;
         const _delete = this.messages.delete;
         const _continue = this.messages.continue;

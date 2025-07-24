@@ -136,13 +136,13 @@ describe('GuidedPrompts', () => {
 
   it('translationAdded returns the selected action', async () => {
     (prompts as any).mockResolvedValueOnce({ act: 'continue' });
-    expect(await GuidedPrompts.translationAdded()).toBe('continue');
+    expect(await GuidedPrompts.translationAdded('key')).toBe('continue');
     (prompts as any).mockResolvedValueOnce({ act: 'edit' });
-    expect(await GuidedPrompts.translationAdded()).toBe('edit');
+    expect(await GuidedPrompts.translationAdded('key')).toBe('edit');
     (prompts as any).mockResolvedValueOnce({ act: 'delete' });
-    expect(await GuidedPrompts.translationAdded()).toBe('delete');
+    expect(await GuidedPrompts.translationAdded('key')).toBe('delete');
     (prompts as any).mockResolvedValueOnce({ act: 'finished' });
-    expect(await GuidedPrompts.translationAdded()).toBe('finished');
+    expect(await GuidedPrompts.translationAdded('key')).toBe('finished');
   });
 
   it('deleteTranslation returns true/false', async () => {
