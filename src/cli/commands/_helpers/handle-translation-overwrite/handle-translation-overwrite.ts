@@ -2,7 +2,6 @@ import { HandleTranslationOverwriteParams } from './types/handle-translation-ove
 import { shouldOverwriteKey } from '../should-overwrite-key/should-overwrite-key.js';
 import { loadTranslations } from '../../_utils/load-translations/laod-translations.js';
 import { PrintMessages } from '../../../_utils/index.js';
-import { flatten } from 'flat';
 
 /**
  * Handles the translation overwrite for a given key, text, file path, and language.
@@ -14,7 +13,7 @@ export const handleTranslationOverwrite = (): ((
     let overwrite = '';
 
     return async ({ key, text, filePath, lang }: HandleTranslationOverwriteParams) => {
-        const translations = flatten(loadTranslations(filePath)) as Record<string, string>;
+        const translations = loadTranslations(filePath) as Record<string, string>;
         const exists = Object.prototype.hasOwnProperty.call(translations, key);
         if (exists) {
             const current = translations[key];

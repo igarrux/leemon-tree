@@ -6,7 +6,6 @@ import { PrintMessages } from '../../_utils/index.js';
 import prompt from 'prompts';
 import { cliMessages } from '../../_messages/messages.js';
 import { TypeDefinition } from '../_utils/type-definition/type-definition.js';
-import { flatten, unflatten } from 'flat';
 import { removeEmptyObjects } from '../_utils/remove-empty-objects/remove-empty-objects.js';
 import { runPostScripts } from '../_helpers/run-post-scripts/run-post-scripts.js';
 /**
@@ -18,7 +17,7 @@ export const deleteCommand = async ({ key, dryRun }: { key: string; dryRun: bool
     const config = getConfig();
     const messages = cliMessages[config.cliLanguage as keyof typeof cliMessages] || cliMessages.en;
     const langs = config?.languages || [];
-    // confirm if the user wants to delete the translation
+    // confirm if the user wants to delete the tra  nslation
     const answer = await prompt({
         type: 'confirm',
         name: 'delete',
@@ -29,11 +28,11 @@ export const deleteCommand = async ({ key, dryRun }: { key: string; dryRun: bool
     let updatedFiles: string[] = [];
     for (const lng of langs) {
         const { filePath } = resolveLanguageConfig(config, lng);
-        let translations = flatten(loadTranslations(filePath)) as Record<string, string>;
+        let translations = loadTranslations(filePath) as Record<string, string>;
 
         if (Object.prototype.hasOwnProperty.call(translations, key)) {
             delete translations[key];
-            translations = removeEmptyObjects(unflatten(translations)) as Record<string, string>;
+            translations = removeEmptyObjects(translations) as Record<string, string>;
             updatedFiles.push(filePath);
             if (!dryRun) {
                 writeFileSync(filePath, JSON.stringify(translations, null, 2), 'utf-8');

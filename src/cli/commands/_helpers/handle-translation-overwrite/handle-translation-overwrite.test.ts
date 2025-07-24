@@ -14,10 +14,6 @@ vi.mock('../../../_utils/index.js', () => ({
   },
 }));
 
-vi.mock('flat', () => ({
-  flatten: vi.fn((t) => t),
-}));
-
 describe('handleTranslationOverwrite', () => {
   let handleTranslationOverwrite: typeof import('./handle-translation-overwrite.js').handleTranslationOverwrite;
   let loadTranslations: Mock;
