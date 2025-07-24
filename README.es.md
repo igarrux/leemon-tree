@@ -22,12 +22,12 @@
 ## 📦 Instalación
 
 ```bash
-npm install --save-dev lemontree
+npm install --save-dev @garrux/lemon-tree
 ```
 
 ⸻
 
-🧾 Configuración básica (lemontree.yaml)
+🧾 Configuración básica (lemon-tree.yaml)
 
 Este archivo debe ubicarse en la raíz del proyecto.
 
@@ -167,7 +167,7 @@ Eso permitiría capturarlos de forma más limpia en scripts bash o node.
 
 ltr init
 
-Inicializa el proyecto con un archivo lemontree.yaml por defecto.
+Inicializa el proyecto con un archivo lemon-tree.yaml por defecto.
 
 ltr set "clave {{var}}"           # Usa la clave como texto base
 ltr set "clave" "Texto a traducir" # Clave y texto separados

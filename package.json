@@ -1,5 +1,5 @@
 {
-    "name": "lemontree",
+    "name": "@garrux/lemon-tree",
     "version": "0.1.0",
     "description": "CLI tool to automate translation management in multilingual projects.",
     "main": "dist/index.js",
