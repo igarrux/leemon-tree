@@ -1,6 +1,6 @@
 {
     "name": "@garrux/lemon-tree",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "CLI tool to automate translation management in multilingual projects.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
