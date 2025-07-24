@@ -1,5 +1,5 @@
 {
-    "name": "lemon-tree",
+    "name": "lemontree",
     "version": "0.1.0",
     "description": "Herramienta CLI para automatizar la creación y gestión de traducciones i18n.",
     "main": "dist/index.js",
@@ -8,6 +8,10 @@
     "bin": {
         "ltr": "dist/index.js",
         "lemon-tree": "dist/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/igarrux/lemon-tree"
     },
     "scripts": {
         "build": "tsc",

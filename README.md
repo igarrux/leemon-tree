@@ -22,12 +22,12 @@
 ## 📦 Installation
 
 ```bash
-npm install --save-dev lemon-tree
+npm install --save-dev lemontree
 ```
 
 ⸻
 
-🧾 Basic Configuration (lemon-tree.yaml)
+🧾 Basic Configuration (lemontree.yaml)
 
 This file should be located at the root of the project.
 
@@ -160,7 +160,7 @@ Would you like Lemon Tree to also pass the results as environment variables (LEM
 
 ltr init
 
-Initializes the project with a default lemon-tree.yaml file.
+Initializes the project with a default lemontree.yaml file.
 
 ltr set "key {{var}}"           # Uses the key as base text
 ltr set "key" "Text to translate" # Key and text separated
