@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import prompts from 'prompts';
 import { cli } from './cli/cli.js';
 
