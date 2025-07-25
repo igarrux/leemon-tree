@@ -8,3 +8,4 @@ src
 coverage
 node_modules
 __temp__
+tsconfig.json
