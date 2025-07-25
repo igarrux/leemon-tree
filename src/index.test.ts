@@ -1,36 +1,24 @@
+import { vi, describe, it, beforeEach, afterEach, expect } from 'vitest';
+
+vi.mock('prompts', () => ({ default: { override: vi.fn() } }));
+vi.mock('./cli/cli.js', () => ({ cli: vi.fn() }));
+
 import prompts from 'prompts';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { cli } from './cli/cli.js';
 
-let cliMock: ReturnType<typeof vi.fn>;
-vi.mock('./cli/cli.js', () => {
-  cliMock = vi.fn();
-  return { cli: cliMock };
-});
-vi.mock('./_utils/load-config/load-config.js', () => ({ config: vi.fn() }));
+describe('src/index.ts', () => {
+    beforeEach(() => {
+        vi.resetModules();
+    });
 
-describe('index.ts', () => {
-  beforeEach(() => {
-    vi.resetModules();
-    cliMock?.mockClear();
-  });
+    it('calls cli()', async () => {
+        await import('./index.js');
+        expect(cli).toHaveBeenCalled();
+    });
 
-  it('calls cli if run directly', async () => {
-    const { runIfDirect } = await import('./index.js');
-    runIfDirect('file:///foo/bar.js', ['/usr/bin/node', '/foo/bar.js']);
-    expect(cliMock).toHaveBeenCalled();
-  });
-
-  it('does not call cli if imported as a module', async () => {
-    const { runIfDirect } = await import('./index.js');
-    runIfDirect('file:///foo/bar.js', ['/usr/bin/node', '/foo/other.js']);
-    expect(cliMock).not.toHaveBeenCalled();
-  });
-
-  it('calls cli if run directly with --yes', async () => {
-    const spy = vi.spyOn(prompts, 'override');
-    const { runIfDirect } = await import('./index.js');
-    runIfDirect('file:///foo/bar.js', ['/usr/bin/node', '/foo/bar.js', '--yes']);
-    expect(cliMock).toHaveBeenCalled();
-    expect(spy).toHaveBeenCalledWith({ delete: true });
-  });
+    it('overrides prompts with LT_AUTO_YES', async () => {
+        process.env.LT_AUTO_YES = 'true';
+        await import('./index.js');
+        expect(prompts.override).toHaveBeenCalledWith({ action: 'yes-to-all', delete: true });
+    });
 });
