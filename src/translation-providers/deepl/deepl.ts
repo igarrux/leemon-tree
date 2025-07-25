@@ -33,6 +33,10 @@ export const deeplTranslate = async (options: DeeplOptions) => {
         if (!translated) throw new Error('No translation found');
         return translated;
     } catch (error) {
-        throw new Error(`Deepl Translate API error: ${error}`);
+        if (error instanceof Error && error.message.includes('Deepl Translate API error')) {
+            console.error(error.message);
+        }
+        console.error('Deepl Translate API error:', error);
+        process.exit(5);
     }
 };

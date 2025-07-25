@@ -30,6 +30,10 @@ export const microsoftTranslate = async (options: ProviderOptions) => {
         if (!translated) throw new Error('No translation found');
         return translated;
     } catch (error) {
-        throw new Error(`Microsoft Translator API error: ${error}`);
+        if (error instanceof Error && error.message.includes('Microsoft Translator API error')) {
+            console.error(error.message);
+        }
+        console.error('Microsoft Translator API error:', error);
+        process.exit(5);
     }
 };

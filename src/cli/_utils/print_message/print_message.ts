@@ -121,12 +121,14 @@ export class PrintMessages {
         console.log(
             `\x1b[33m${this.cliMessages.translation_not_found.replace('{{key}}', `\x1b[0m\x1b[36m${key}\x1b[33m`)}\x1b[0m`,
         );
+        process.exit(4);
     }
 
     static typeDefinitionNotFound(key: string) {
         console.log(
             `\x1b[33m${this.cliMessages.type_definition_not_found.replace('{{key}}', `\x1b[0m\x1b[36m${key}\x1b[33m`)}\x1b[0m`,
         );
+        process.exit(4);
     }
 
     static lintKey(key: string) {

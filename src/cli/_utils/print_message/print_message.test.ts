@@ -205,11 +205,12 @@ describe('PrintMessages', () => {
             totalFiles: 4,
             totalKeys: 5,
         });
-        const call = logSpy.mock.calls.find(([msg]: [string]) =>
-            typeof msg === 'string' &&
-            /2 keys with problems[\s\S]*3 files with problems[\s\S]*4 total files[\s\S]*5 total keys[\s\S]*1 keys without problems/.test(
-                msg.replace(/\x1B\[[0-9;]*m/g, '') // quita colores ANSI
-            )
+        const call = logSpy.mock.calls.find(
+            ([msg]: [string]) =>
+                typeof msg === 'string' &&
+                /2 keys with problems[\s\S]*3 files with problems[\s\S]*4 total files[\s\S]*5 total keys[\s\S]*1 keys without problems/.test(
+                    msg.replace(/\x1B\[[0-9;]*m/g, ''), // quita colores ANSI
+                ),
         );
         if (!call) {
             // eslint-disable-next-line no-console
@@ -258,12 +259,18 @@ describe('PrintMessages', () => {
     });
 
     it('translationNotFound prints translation_not_found', () => {
-        PrintMessages.translationNotFound('key');
+        expect(() => PrintMessages.translationNotFound('key')).toThrow(
+            'process.exit unexpectedly called with "4"',
+        );
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('key'));
+        vi.resetModules();
     });
 
     it('typeDefinitionNotFound prints type_definition_not_found', () => {
-        PrintMessages.typeDefinitionNotFound('key');
+        expect(() => PrintMessages.typeDefinitionNotFound('key')).toThrow(
+            'process.exit unexpectedly called with "4"',
+        );
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('key'));
+        vi.resetModules();
     });
 });

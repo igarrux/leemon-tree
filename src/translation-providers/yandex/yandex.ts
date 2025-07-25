@@ -29,6 +29,10 @@ export const yandexTranslate = async (options: ProviderOptions) => {
         if (!translated) throw new Error('No translation found');
         return translated;
     } catch (error) {
-        throw new Error(`Yandex Translate API error: ${error}`);
+        if (error instanceof Error && error.message.includes('Yandex Translate API error')) {
+            console.error(error.message);
+        }
+        console.error('Yandex Translate API error:', error);
+        process.exit(5);
     }
 };

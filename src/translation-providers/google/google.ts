@@ -20,13 +20,19 @@ export const googleTranslate = async (options: ProviderOptions) => {
             body: JSON.stringify({ q, source, target, format: 'text' }),
         });
         if (!res.ok) {
-            throw new Error(`Google Translate API error: ${res.status} ${res.statusText}`);
+            throw new Error(
+                `Google Translate API error: ${res.status} ${res.statusText} ${await res.text()}`,
+            );
         }
         const data = await res.json();
         const translated = data?.data?.translations?.[0]?.translatedText ?? '';
         if (!translated) throw new Error('No translation found');
         return translated;
     } catch (error) {
-        throw new Error(`Google Translate API error: ${error}`);
+        if (error instanceof Error && error.message.includes('Google Translate API error')) {
+            console.error(error.message);
+        }
+        console.error('Google Translate API error:', error);
+        process.exit(5);
     }
 };

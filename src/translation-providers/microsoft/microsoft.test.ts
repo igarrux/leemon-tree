@@ -23,6 +23,7 @@ describe('microsoftTranslate', () => {
             statusText: 'Unauthorized',
             text: () => Promise.resolve('Unauthorized'),
         } as Response);
+        const spyLogError = vi.spyOn(console, 'error');
         await expect(
             microsoftTranslate({
                 text: 'Hello, world!',
@@ -30,7 +31,10 @@ describe('microsoftTranslate', () => {
                 to: 'es',
                 apiKey: '1234567890',
             }),
-        ).rejects.toThrow('Microsoft Translator API error: 401 Unauthorized');
+        ).rejects.toThrow('process.exit unexpectedly called with "5"');
+        expect(spyLogError).toHaveBeenCalledWith(
+            'Microsoft Translator API error: 401 Unauthorized Unauthorized',
+        );
     });
 
     it('should return the text if dryRun is true', async () => {
@@ -49,6 +53,7 @@ describe('microsoftTranslate', () => {
             ok: true,
             json: () => Promise.resolve(),
         } as Response);
+        const spyLogError = vi.spyOn(console, 'error');
         await expect(
             microsoftTranslate({
                 text: 'Hello, world!',
@@ -56,11 +61,18 @@ describe('microsoftTranslate', () => {
                 to: 'es',
                 apiKey: '1234567890',
             }),
-        ).rejects.toThrow('Microsoft Translator API error: Error: No translation found');
+        ).rejects.toThrow('process.exit unexpectedly called with "5"');
+        expect(spyLogError).toHaveBeenCalledWith(
+            'Microsoft Translator API error:',
+            expect.objectContaining({
+                message: 'No translation found',
+            }),
+        );
     });
 
     it('should throw error if error occurs', async () => {
         vi.spyOn(global, 'fetch').mockRejectedValue(new Error('Error'));
+        const spyLogError = vi.spyOn(console, 'error');
         await expect(
             microsoftTranslate({
                 text: 'Hello, world!',
@@ -68,6 +80,12 @@ describe('microsoftTranslate', () => {
                 to: 'es',
                 apiKey: '1234567890',
             }),
-        ).rejects.toThrow('Microsoft Translator API error: Error: Error');
+        ).rejects.toThrow('process.exit unexpectedly called with "5"');
+        expect(spyLogError).toHaveBeenCalledWith(
+            'Microsoft Translator API error:',
+            expect.objectContaining({
+                message: 'Error',
+            }),
+        );
     });
 });
