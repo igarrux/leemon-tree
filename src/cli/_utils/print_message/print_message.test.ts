@@ -10,18 +10,15 @@ import { cliMessages } from '../../_messages/messages';
 import { config } from '../../../_utils';
 
 let logSpy: any;
-let warnSpy: any;
 let writeSpy: any;
 
 beforeEach(() => {
     logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-    warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
     writeSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
 });
 
 afterEach(() => {
     logSpy.mockRestore();
-    warnSpy.mockRestore();
     writeSpy.mockRestore();
     vi.resetModules();
     vi.clearAllMocks();
@@ -49,7 +46,7 @@ describe('PrintMessages', () => {
 
     it('casingConflict prints warning', () => {
         PrintMessages.casingConflict('dir', 'similar', 'base');
-        expect(warnSpy).toHaveBeenCalledWith(
+        expect(logSpy).toHaveBeenCalledWith(
             expect.stringContaining(
                 cliMessages.en.casing_conflict
                     .replace('{{dir}}', 'dir')
@@ -61,7 +58,7 @@ describe('PrintMessages', () => {
 
     it('renamedFile prints warning', () => {
         PrintMessages.renamedFile('old', 'new');
-        expect(warnSpy).toHaveBeenCalledWith(
+        expect(logSpy).toHaveBeenCalledWith(
             expect.stringContaining(
                 cliMessages.en.renamed_file
                     .replace('{{oldPath}}', 'old')
@@ -84,7 +81,7 @@ describe('PrintMessages', () => {
 
     it('failedToTranslate prints warning', () => {
         PrintMessages.failedToTranslate('key', 'en', 'es', 'err');
-        expect(warnSpy).toHaveBeenCalledWith(
+        expect(logSpy).toHaveBeenCalledWith(
             expect.stringMatching(
                 cliMessages.en.failed_to_translate
                     .replace('{{key}}', '.*')
@@ -97,7 +94,7 @@ describe('PrintMessages', () => {
 
     it('skippedKey prints warning', () => {
         PrintMessages.skippedKey('key', 'es');
-        expect(warnSpy).toHaveBeenCalledWith(
+        expect(logSpy).toHaveBeenCalledWith(
             expect.stringMatching(
                 cliMessages.en.skipped_key.replace('{{key}}', '.+').replace('{{lang}}', '.+'),
             ),
@@ -111,27 +108,27 @@ describe('PrintMessages', () => {
 
     it('editing prints editing', () => {
         PrintMessages.editing();
-        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.editing));
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.editing));
     });
 
     it('emptyText prints empty_text', () => {
         PrintMessages.emptyText();
-        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.empty_text));
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.empty_text));
     });
 
     it('emptyKey prints empty_key', () => {
         PrintMessages.emptyKey();
-        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.empty_key));
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.empty_key));
     });
 
     it('overwriteAll prints overwrite_all', () => {
         PrintMessages.overwriteAll();
-        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.overwrite_all));
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.overwrite_all));
     });
 
     it('skipAll prints skip_all', () => {
         PrintMessages.skipAll();
-        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.skip_all));
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(cliMessages.en.skip_all));
     });
 
     it('translationAdded prints translation_added', () => {

@@ -28,13 +28,13 @@ export class PrintMessages {
             .replace('{{dir}}', dir)
             .replace('{{similar}}', similar)
             .replace('{{baseName}}', baseName);
-        console.warn(`\x1b[33m${message}\x1b[0m`);
+       console.log(`\x1b[33m${message}\x1b[0m`);
     }
     static renamedFile(oldPath: string, newPath: string) {
         const message = this.cliMessages.renamed_file
             .replace('{{oldPath}}', oldPath)
             .replace('{{newPath}}', newPath);
-        console.warn(`\x1b[33m${message}\x1b[0m`);
+       console.log(`\x1b[33m${message}\x1b[0m`);
     }
 
     static keyExists(lng: string, key: string, currentValue: string) {
@@ -56,35 +56,35 @@ export class PrintMessages {
             .replace('{{sourceLanguage}}', `\x1b[32m'${sourceLanguage}'\x1b[33m`)
             .replace('{{lang}}', `\x1b[32m'${targetLanguage}'\x1b[33m`)
             .replace('{{error}}', `\x1b[32m'${error}'\x1b[33m`);
-        console.warn(`\x1b[33m${message}\x1b[0m`);
+       console.log(`\x1b[33m${message}\x1b[0m`);
     }
 
     static skippedKey(key: string, lang: string) {
         const message = this.cliMessages.skipped_key
             .replace('{{key}}', `\x1b[32m'${key}'\x1b[33m`)
             .replace('{{lang}}', `\x1b[32m'${lang}'\x1b[33m`);
-        console.warn(`\x1b[33m${message}\x1b[0m`);
+       console.log(`\x1b[33m${message}\x1b[0m`);
     }
 
     static clearTerminal() {
         process.stdout.write('\x1Bc');
     }
     static editing() {
-        console.warn(`\x1b[34m${this.cliMessages.editing}\x1b[0m`);
+       console.log(`\x1b[34m${this.cliMessages.editing}\x1b[0m`);
     }
     static emptyText() {
-        console.warn(`\x1b[33m${this.cliMessages.empty_text}\x1b[0m`);
+       console.log(`\x1b[33m${this.cliMessages.empty_text}\x1b[0m`);
     }
     static emptyKey() {
-        console.warn(`\x1b[33m${this.cliMessages.empty_key}\x1b[0m`);
+       console.log(`\x1b[33m${this.cliMessages.empty_key}\x1b[0m`);
     }
 
     static overwriteAll() {
-        console.warn(`\x1b[33m${this.cliMessages.overwrite_all}\x1b[0m`);
+       console.log(`\x1b[33m${this.cliMessages.overwrite_all}\x1b[0m`);
     }
 
     static skipAll() {
-        console.warn(`\x1b[33m${this.cliMessages.skip_all}\x1b[0m`);
+       console.log(`\x1b[33m${this.cliMessages.skip_all}\x1b[0m`);
     }
 
     static translationAdded(key: string) {
