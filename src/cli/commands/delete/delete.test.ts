@@ -79,7 +79,8 @@ describe('deleteCommand', () => {
         await deleteCommand({ key: 'foo', dryRun: false });
         expect(writeFileSync).not.toHaveBeenCalled();
         expect(PrintMessages.dryRunResult).not.toHaveBeenCalled();
-        expect(PrintMessages.translationDeleted).toHaveBeenCalledWith('foo');
+        expect(PrintMessages.translationDeleted).not.toHaveBeenCalled();
+        expect(PrintMessages.translationNotFound).toHaveBeenCalledWith('foo');
     });
 
     it('handles missing translations object', async () => {
@@ -87,7 +88,8 @@ describe('deleteCommand', () => {
         (loadTranslations as Mock).mockImplementation(() => ({}));
         await deleteCommand({ key: 'foo', dryRun: false });
         expect(writeFileSync).not.toHaveBeenCalled();
-        expect(PrintMessages.translationDeleted).toHaveBeenCalledWith('foo');
+        expect(PrintMessages.translationDeleted).not.toHaveBeenCalled();
+        expect(PrintMessages.translationNotFound).toHaveBeenCalledWith('foo');
     });
     it('uses cliMessages.en if cliMessages[lang] does not exist', async () => {
         (config as Mock).mockReturnValueOnce({ cliLanguage: 'zh', languages: ['ru', 'en'] });
@@ -126,6 +128,7 @@ describe('deleteCommand', () => {
         await deleteCommand({ key: 'foo', dryRun: false });
         expect(writeFileSync).not.toHaveBeenCalled();
         expect(PrintMessages.dryRunResult).not.toHaveBeenCalled();
-        expect(PrintMessages.translationDeleted).toHaveBeenCalledWith('foo');
+        expect(PrintMessages.translationDeleted).not.toHaveBeenCalled();
+        expect(PrintMessages.translationNotFound).toHaveBeenCalledWith('foo');
     });
 });

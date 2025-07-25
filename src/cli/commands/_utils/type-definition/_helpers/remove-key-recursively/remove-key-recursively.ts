@@ -12,6 +12,7 @@ export function removeKeyRecursively(
     key: string,
 ): boolean {
     const membered = getMemberedNode(decl);
+    let isSomeDeleted = false;
     if (!membered) return false;
     const parts = key.split('.');
     function recurse(current: TypeElementMemberedNode, idx: number): boolean {
@@ -21,6 +22,7 @@ export function removeKeyRecursively(
             current.getProperty(parts[idx]);
 
         if (!prop) return false;
+        isSomeDeleted = true;
         if (idx === parts.length - 1) {
             prop.remove();
         } else {
@@ -37,5 +39,6 @@ export function removeKeyRecursively(
         // Return true if current has no properties left
         return current.getProperties().length === 0;
     }
-    return recurse(membered, 0);
+    recurse(membered, 0);
+    return isSomeDeleted;
 }

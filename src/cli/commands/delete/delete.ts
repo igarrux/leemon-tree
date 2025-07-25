@@ -46,5 +46,5 @@ export const deleteCommand = async ({ key, dryRun }: { key: string; dryRun: bool
     runPostScripts(`'{"key": "${key}"}'`, 'delete');
     if (dryRun) PrintMessages.dryRunResult(updatedFiles);
     if (someIsNotFound) PrintMessages.translationNotFound(key);
-    PrintMessages.translationDeleted(key);
+    if (!someIsNotFound) PrintMessages.translationDeleted(key);
 };
