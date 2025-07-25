@@ -1,6 +1,6 @@
 {
     "name": "@garrux/lemon-tree",
-    "version": "0.3.9",
+    "version": "0.3.11",
     "description": "CLI tool to automate translation management in multilingual projects.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -20,7 +20,8 @@
         "build": "tsc && cp -r src/cli/commands/init/init-lemon-tree.config.yaml dist/cli/commands/init/init-lemon-tree.config.yaml",
         "start": "node dist/index.js",
         "lint": "eslint . --ext .ts",
-        "test": "vitest"
+        "test": "vitest",
+        "prepublishOnly": "npm run build"
     },
     "keywords": [
         "i18n",
