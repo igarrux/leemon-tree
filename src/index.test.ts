@@ -1,3 +1,4 @@
+import prompts from 'prompts';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 let cliMock: ReturnType<typeof vi.fn>;
@@ -23,5 +24,13 @@ describe('index.ts', () => {
     const { runIfDirect } = await import('./index.js');
     runIfDirect('file:///foo/bar.js', ['/usr/bin/node', '/foo/other.js']);
     expect(cliMock).not.toHaveBeenCalled();
+  });
+
+  it('calls cli if run directly with --yes', async () => {
+    const spy = vi.spyOn(prompts, 'override');
+    const { runIfDirect } = await import('./index.js');
+    runIfDirect('file:///foo/bar.js', ['/usr/bin/node', '/foo/bar.js', '--yes']);
+    expect(cliMock).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith({ delete: true });
   });
 });
