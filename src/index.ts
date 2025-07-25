@@ -4,8 +4,8 @@ import { cli } from './cli/cli.js';
 export function runIfDirect(metaUrl = import.meta.url, argv = process.argv) {
     const autoYes = process.env.LT_AUTO_YES === 'true';
     if (metaUrl === `file://${argv[1]}`) {
-        if (argv.includes('--yes') || autoYes) prompts.override({ delete: true });
-        if (autoYes) prompts.override({ action: 'yes-to-all' });
+        if (argv.includes('--yes')) prompts.override({ delete: true });
+        if (autoYes) prompts.override({ action: 'yes-to-all', delete: true });
         cli();
     }
 }
