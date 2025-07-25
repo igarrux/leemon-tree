@@ -23,4 +23,10 @@ describe('quotedKey', () => {
   it('quotes empty string', () => {
     expect(quotedKey('')).toBe('""');
   });
+  it('quotes with single quotes when singleQuote is true', () => {
+    expect(quotedKey('foo bar', true)).toBe("'foo bar'");
+  });
+  it('does not escape quotes when escape is false', () => {
+    expect(quotedKey('foo"bar', false, false)).toBe('"foo"bar"');
+  });
 }); 

@@ -31,6 +31,11 @@ vi.mock('../../../../_utils/index.js', () => ({
         cliLanguage: 'es',
     })),
 }));
+vi.mock('./../../../_utils/print_message/print_message.js', () => ({
+    PrintMessages: {
+        typeDefinitionNotFound: vi.fn(),
+    },
+}));
 
 describe('TypeDefinition', () => {
     beforeEach(async () => {
@@ -162,12 +167,12 @@ describe('TypeDefinition', () => {
             const sf = project.addSourceFileAtPath(FILE);
             sf.getInterface(EXPORT)?.remove();
             await sf.save();
-            await expect(TypeDefinition.removeType('foo', 'test')).resolves.toBeUndefined();
+            await expect(TypeDefinition.removeType('foo', 'test')).resolves.toBe(false);
         });
         it('does nothing if typeDefinition is missing file or exportName (removeType)', async () => {
             const original = TypeDefinition['typeDefConfig'];
             TypeDefinition['typeDefConfig'] = {} as any;
-            await expect(TypeDefinition.removeType('foo', 'notest')).resolves.toBeUndefined();
+            await expect(TypeDefinition.removeType('foo', 'notest')).resolves.toBe(false);
             TypeDefinition['typeDefConfig'] = original;
         });
         it('removes a nested key', async () => {

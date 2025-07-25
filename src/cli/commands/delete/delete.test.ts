@@ -27,6 +27,7 @@ vi.mock('../../_utils/index.js', () => ({
     PrintMessages: {
         dryRunResult: vi.fn(),
         translationDeleted: vi.fn(),
+        translationNotFound: vi.fn(),
     },
 }));
 

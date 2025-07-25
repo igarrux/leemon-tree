@@ -18,7 +18,10 @@ export function buildNestedType(
     for (let i = 0; i < parts.length; i++) {
         const part = quotedKey(parts[i]);
         const isLast = i === parts.length - 1;
-        let prop = current.getProperty(part);
+        let prop =
+            current.getProperty(quotedKey(parts[i], true)) ||
+            current.getProperty(part) ||
+            current.getProperty(parts[i]);
         if (!prop) {
             prop = current.addProperty({
                 name: part,

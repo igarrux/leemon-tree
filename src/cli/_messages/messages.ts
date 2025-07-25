@@ -48,6 +48,8 @@ export const cliMessages = {
             'You can edit them with: \x1b[0mltr\x1b[33m set \x1b[34m\x1b[49mkey \x1b[32m"text to translate"\x1b[0m',
         lint_delete: 'You can delete them with: \x1b[0mltr\x1b[33m delete \x1b[34m\x1b[49mkey',
         no_add_translation: 'No translation added: {{key}}',
+        translation_not_found: 'Translation not found: {{key}}',
+        type_definition_not_found: 'Type definition not found: {{key}}',
         lint_summary:
             '\n{{keysWithProblems}} keys with problems' +
             '\n{{filesWithProblems}} files with problems' +
@@ -106,6 +108,8 @@ export const cliMessages = {
             'Puedes editarlas con: \x1b[0mltr\x1b[33m set \x1b[34m\x1b[49mclave \x1b[32m"texto a traducir"\x1b[0m',
         lint_delete: 'Puedes eliminarlas con: \x1b[0mltr\x1b[33m delete \x1b[34m\x1b[49mclave',
         no_add_translation: 'No se agregó la traducción {{key}}',
+        translation_not_found: 'Traducción no encontrada: {{key}}',
+        type_definition_not_found: 'Definición de tipo no encontrada: {{key}}',
         lint_summary:
             '\n{{keysWithProblems}} claves con problemas' +
             '\n{{filesWithProblems}} archivos con problemas' +

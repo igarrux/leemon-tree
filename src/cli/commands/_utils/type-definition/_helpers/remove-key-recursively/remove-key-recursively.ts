@@ -10,13 +10,16 @@ import { getMemberedNode } from '../../_utils/get-membered-node/get-membered-nod
 export function removeKeyRecursively(
     decl: InterfaceDeclaration | TypeAliasDeclaration,
     key: string,
-): void {
+): boolean {
     const membered = getMemberedNode(decl);
-    if (!membered) return;
+    if (!membered) return false;
     const parts = key.split('.');
     function recurse(current: TypeElementMemberedNode, idx: number): boolean {
-        const part = quotedKey(parts[idx]);
-        const prop = current.getProperty(part);
+        const prop =
+            current.getProperty(quotedKey(parts[idx], true)) ||
+            current.getProperty(quotedKey(parts[idx])) ||
+            current.getProperty(parts[idx]);
+
         if (!prop) return false;
         if (idx === parts.length - 1) {
             prop.remove();
@@ -34,5 +37,5 @@ export function removeKeyRecursively(
         // Return true if current has no properties left
         return current.getProperties().length === 0;
     }
-    recurse(membered, 0);
+    return recurse(membered, 0);
 }

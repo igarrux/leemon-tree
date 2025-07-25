@@ -117,6 +117,18 @@ export class PrintMessages {
         );
     }
 
+    static translationNotFound(key: string) {
+        console.log(
+            `\x1b[33m${this.cliMessages.translation_not_found.replace('{{key}}', `\x1b[0m\x1b[36m${key}\x1b[33m`)}\x1b[0m`,
+        );
+    }
+
+    static typeDefinitionNotFound(key: string) {
+        console.log(
+            `\x1b[33m${this.cliMessages.type_definition_not_found.replace('{{key}}', `\x1b[0m\x1b[36m${key}\x1b[33m`)}\x1b[0m`,
+        );
+    }
+
     static lintKey(key: string) {
         console.log(
             `${this.cliMessages.lint_key.replace('{{key}}', `\x1b[0m\x1b[36m${key}\x1b[33m`)}`,

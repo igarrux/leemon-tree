@@ -256,4 +256,14 @@ describe('PrintMessages', () => {
         PrintMessages.noAddTranslation('key');
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('key'));
     });
+
+    it('translationNotFound prints translation_not_found', () => {
+        PrintMessages.translationNotFound('key');
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('key'));
+    });
+
+    it('typeDefinitionNotFound prints type_definition_not_found', () => {
+        PrintMessages.typeDefinitionNotFound('key');
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('key'));
+    });
 });

@@ -26,6 +26,7 @@ export const deleteCommand = async ({ key, dryRun }: { key: string; dryRun: bool
 
     if (!answer?.delete) return;
     let updatedFiles: string[] = [];
+    let someIsNotFound = false;
     for (const lng of langs) {
         const { filePath } = resolveLanguageConfig(config, lng);
         let translations = loadTranslations(filePath) as Record<string, string>;
@@ -38,9 +39,12 @@ export const deleteCommand = async ({ key, dryRun }: { key: string; dryRun: bool
                 writeFileSync(filePath, JSON.stringify(translations, null, 2), 'utf-8');
                 TypeDefinition.removeType(key, lng);
             }
+        } else {
+            someIsNotFound = true;
         }
     }
     runPostScripts(`'{"key": "${key}"}'`, 'delete');
     if (dryRun) PrintMessages.dryRunResult(updatedFiles);
+    if (someIsNotFound) PrintMessages.translationNotFound(key);
     PrintMessages.translationDeleted(key);
 };
